@@ -35,6 +35,21 @@ module Twofishes
       end
     end
 
+    # Bulk Reverse geocodes lat/lng.
+    #
+    # @param [Array] array of latitude, longitude pairs
+    # @return [Twofishes::Result]
+    # @example
+    #   Twofishes::Client.reverse_geocode([[47.3787733, 8.5273363], [34.063201, -118.441029]])
+    #
+    def self.bulk_reverse_geocode(coordinates, options = {})
+      handle_response do
+        options[:latlngs] = coordinates
+        request = Twofishes::BulkGeocodeRequest.new(options)
+        thrift_client.bulkReverseGeocode(request)
+      end
+    end
+
     def self.thrift_client
       ThriftClient.new(
         Geocoder::Client,
