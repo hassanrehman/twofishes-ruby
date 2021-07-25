@@ -6,6 +6,12 @@ module Twofishes
         new(interpretation)
       end
     end
+
+    def self.from_bulk_response(response)
+      response.interpretationIndexes.map do |indexes|
+        indexes[0] && new(response.interpretations[indexes[0]])
+      end
+    end
   end
 end
 

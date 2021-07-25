@@ -43,7 +43,7 @@ module Twofishes
     #   Twofishes::Client.reverse_geocode([[47.3787733, 8.5273363], [34.063201, -118.441029]])
     #
     def self.bulk_reverse_geocode(coordinates, options = {})
-      handle_response do
+      handle_bulk_response do
         options[:latlngs] = coordinates
         request = Twofishes::BulkReverseGeocodeRequest.new(options)
         thrift_client.bulkReverseGeocode(request)
@@ -62,6 +62,12 @@ module Twofishes
 
     def self.handle_response
       Result.from_response(yield)
+    rescue => e
+      raise Twofishes::InvalidResponseError, e.message
+    end
+
+    def self.handle_bulk_response
+      Result.from_bulk_response(yield)
     rescue => e
       raise Twofishes::InvalidResponseError, e.message
     end
