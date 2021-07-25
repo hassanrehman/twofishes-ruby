@@ -7,6 +7,10 @@
 
 A client/wrapper for foursquare's sparse geocoding / reverse geocoding server Twofishes (https://github.com/foursquare/twofishes).
 
+## Fork Info
+The [original gem](https://github.com/masone/twofishes-ruby) does not cover bulk capabilities of the thirft server. This repo adds the ability for bulk reverse geocode.
+
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -48,6 +52,13 @@ Use the following methods to geocode / reverse geocode.
 ```ruby
 Twofishes::Client.geocode('Ljubljana')
 Twofishes::Client.reverse_geocode([0, 0])
+```
+
+Use the following method to bulk reverse geocode.
+
+```ruby
+# as coordinates, accepts the array of anything that can be used in reverse_geocode
+Twofishes::Client.bulk_reverse_geocode([[0, 0], [34.063201, -118.441029]])
 ```
                                       
 If you want the Twofishes server to return fields that are not included by default, you can pass `geocode` an Array of `ResponseIncludes` constants, illustrated by the example below.
