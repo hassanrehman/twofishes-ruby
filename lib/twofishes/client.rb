@@ -45,7 +45,7 @@ module Twofishes
     def self.bulk_reverse_geocode(coordinates, options = {})
       handle_response do
         options[:latlngs] = coordinates
-        request = Twofishes::BulkGeocodeRequest.new(options)
+        request = Twofishes::BulkReverseGeocodeRequest.new(options)
         thrift_client.bulkReverseGeocode(request)
       end
     end
