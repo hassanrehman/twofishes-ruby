@@ -1,5 +1,5 @@
 module Twofishes
-  class GeocodeRequest < ::GeocodeRequest
+  class BulkGeocodeRequest < ::GeocodeRequest
     def initialize(options = {})
       options = substitute_aliases(options)
       options[:latlngs] = prepare_latlngs(options[:latlngs])
